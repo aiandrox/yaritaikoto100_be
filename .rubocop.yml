@@ -1,0 +1,31 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-factory_bot
+  - rubocop-graphql
+  - rubocop-inflector
+
+# Rubocop
+# https://docs.rubocop.org/rubocop/index.html
+AllCops:
+  TargetRubyVersion: 3.2.2
+  NewCops: enable
+  Exclude:
+    - bin/bundle
+
+Metrics/MethodLength:
+  Max: 20
+  CountAsOne:
+    - array
+    - hash
+    - heredoc
+
+Metrics/PerceivedComplexity:
+  Max: 12
+
+Layout/LineLength:
+  Max: 120
+  AllowURI: true
+
+Style/Documentation:
+  Enabled: false
