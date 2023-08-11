@@ -10,6 +10,8 @@
 #  updated_at  :datetime         not null
 #
 class User < ApplicationRecord
+  has_many :lists, dependent: :destroy
+
   attr_accessor :uuid
 
   class << self
