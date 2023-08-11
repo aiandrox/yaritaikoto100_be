@@ -11,10 +11,9 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user,
     }
-    result = Yaritaikoto100BeSchema.execute(query, variables:, context:,
+    result = EnterpriseSchema.execute(query, variables:, context:,
                                                    operation_name:)
     render json: result
   rescue StandardError => e
@@ -51,5 +50,14 @@ class GraphqlController < ApplicationController
 
     render json: { errors: [{ message: error.message, backtrace: error.backtrace }], data: {} },
            status: :internal_server_error
+  end
+
+  def current_user
+    return @current_user if defined?(@current_user)
+
+    if (user_id = cookies.signed[:user_id])
+      user = User.find_by(id: user_id)
+      @current_user ||= user if user && user.authenticated?(cookies[:uuid])
+    end
   end
 end
