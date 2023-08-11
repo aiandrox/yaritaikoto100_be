@@ -18,7 +18,7 @@ class User < ApplicationRecord
     def create_anonymous!
       uuid = new_uuid
       user = new(
-        uuid: uuid,
+        uuid:,
         user_digest: digest(uuid)
       )
       user.save!
@@ -33,7 +33,7 @@ class User < ApplicationRecord
 
     def digest(string)
       cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-      BCrypt::Password.create(string, cost: cost)
+      BCrypt::Password.create(string, cost:)
     end
   end
 
