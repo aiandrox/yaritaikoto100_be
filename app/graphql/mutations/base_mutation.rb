@@ -6,5 +6,10 @@ module Mutations
     field_class Types::BaseField
     input_object_class Types::BaseInputObject
     object_class Types::BaseObject
+
+    # NOTE: 認可処理を実装する
+    def authorized?(**_inputs)
+      raise NotImplementedError
+    end
   end
 end

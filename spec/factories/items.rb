@@ -5,6 +5,10 @@ FactoryBot.define do
     list
     sequence(:number)
     name { Faker::Name.name }
-    done_at { Time.zone.now }
+    done_at { nil }
+
+    trait :done do
+      done_at { Time.zone.now }
+    end
   end
 end
