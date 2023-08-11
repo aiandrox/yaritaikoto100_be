@@ -21,7 +21,7 @@ RSpec.describe Resolvers::Enterprise::CurrentList, type: :request do
       QUERY
     end
     let(:variables) do
-      { }
+      {}
     end
 
     context 'when exist my list' do
@@ -30,18 +30,20 @@ RSpec.describe Resolvers::Enterprise::CurrentList, type: :request do
 
       it 'return expected list' do
         result = EnterpriseSchema.execute(query:, context:, variables:)
-        expect(result.to_h.deep_symbolize_keys[:data]).to eq({
-          currentList: {
-            id: list.id,
-            items: [
-              {
-                number: item.number,
-                name: item.name,
-                doneAt: item.done_at.iso8601
-              }
-            ]
+        expect(result.to_h.deep_symbolize_keys[:data]).to eq(
+          {
+            currentList: {
+              id: list.id,
+              items: [
+                {
+                  number: item.number,
+                  name: item.name,
+                  doneAt: item.done_at.iso8601
+                }
+              ]
+            }
           }
-        })
+        )
       end
     end
 
@@ -53,7 +55,7 @@ RSpec.describe Resolvers::Enterprise::CurrentList, type: :request do
 
       it 'return expected list' do
         result = EnterpriseSchema.execute(query:, context:, variables:)
-        expect(result.to_h.deep_symbolize_keys[:data]).to eq(nil)
+        expect(result.to_h.deep_symbolize_keys[:data]).to be_nil
       end
     end
   end

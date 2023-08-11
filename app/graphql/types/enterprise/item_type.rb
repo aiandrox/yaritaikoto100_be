@@ -24,6 +24,10 @@ module Types
             GraphQL::Types::ISO8601DateTime,
             null: true,
             description: '完了日時'
+
+      def list
+        load_object_association(:list)
+      end
     end
   end
 end

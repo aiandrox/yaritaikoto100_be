@@ -5,7 +5,7 @@ module Resolvers
     class CurrentList < BaseResolver
       type Types::Enterprise::ListType, null: false
 
-      def resolve(**args)
+      def resolve(**_args)
         context[:current_user].lists.order(updated_at: :desc).first
       end
 

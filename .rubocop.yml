@@ -24,9 +24,19 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 12
 
+Metrics/BlockLength:
+  Exclude:
+    - lib/tasks/auto_annotate_models.rake
+
 Layout/LineLength:
   Max: 120
   AllowURI: true
 
 Style/Documentation:
   Enabled: false
+
+RSpec/ExampleLength:
+  Max: 135
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10

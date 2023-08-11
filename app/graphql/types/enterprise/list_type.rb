@@ -19,6 +19,14 @@ module Types
             [ItemType],
             null: false,
             description: 'やりたいことリストの項目'
+
+      def user
+        load_object_association(:user)
+      end
+
+      def items
+        load_object_association(:items)
+      end
     end
   end
 end

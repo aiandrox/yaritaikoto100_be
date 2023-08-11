@@ -95,6 +95,9 @@ GEM
       railties
       sprockets-rails
     graphql (2.0.26)
+    graphql-batch (0.5.3)
+      graphql (>= 1.12.18, < 3)
+      promise.rb (~> 0.7.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
@@ -132,6 +135,7 @@ GEM
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
+    promise.rb (0.7.4)
     puma (5.6.6)
       nio4r (~> 2.0)
     racc (1.7.1)
@@ -250,6 +254,7 @@ DEPENDENCIES
   faker
   graphiql-rails
   graphql
+  graphql-batch
   mysql2
   puma (~> 5.0)
   rails (~> 7.0.7)
