@@ -13,6 +13,12 @@ module Yaritaikoto100Be
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    # 言語設定
+    config.time_zone = 'Tokyo'
+    config.i18n.default_locale = :ja
+    config.i18n.fallbacks = [:en]
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -25,5 +31,19 @@ module Yaritaikoto100Be
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+
+    config.generators do |g|
+      g.test_framework :rspec,
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: false,
+        controller_specs: false
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
+    end
+
+    config.generators.after_generate do |files|
+      system('bundle exec rubocop --autocorrect-all --except Style/EmptyMethod ' + files.join(' '), exception: false)
+    end
   end
 end
