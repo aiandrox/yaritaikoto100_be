@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :item do
     list
     sequence(:number)
-    name { FFaker::Name.name }
+    name { Faker::Name.name }
     done_at { Time.zone.now }
   end
 end

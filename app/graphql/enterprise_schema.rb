@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Yaritaikoto100BeSchema < GraphQL::Schema
+class EnterpriseSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 
