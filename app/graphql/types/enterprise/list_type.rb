@@ -11,9 +11,15 @@ module Types
             description: 'ユーザ'
 
       field :id,
-            Int,
+            String,
             null: false,
+            method: :uuid,
             description: 'やりたいことリストID'
+
+      field :published,
+            Boolean,
+            null: false,
+            description: '公開状態'
 
       field :items,
             [ItemType],

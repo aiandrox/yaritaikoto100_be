@@ -23,9 +23,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_142532) do
 
   create_table "lists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.string "uuid", null: false
+    t.boolean "published", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_lists_on_user_id"
+    t.index ["uuid"], name: "index_lists_on_uuid", unique: true
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

@@ -11,6 +11,7 @@ RSpec.describe Resolvers::Enterprise::CurrentList, type: :request do
         query CurrentListQuery {
           currentList {
             id
+            published
             items {
               number
               name
@@ -30,17 +31,20 @@ RSpec.describe Resolvers::Enterprise::CurrentList, type: :request do
 
       it 'return expected list' do
         result = EnterpriseSchema.execute(query:, context:, variables:)
-        expect(result.to_h.deep_symbolize_keys[:data]).to eq(
+        expect(result.to_h.deep_symbolize_keys).to eq(
           {
-            currentList: {
-              id: list.id,
-              items: [
-                {
-                  number: item.number,
-                  name: item.name,
-                  doneAt: item.done_at.iso8601
-                }
-              ]
+            data: {
+              currentList: {
+                id: list.uuid,
+                published: list.published,
+                items: [
+                  {
+                    number: item.number,
+                    name: item.name,
+                    doneAt: nil
+                  }
+                ]
+              }
             }
           }
         )
