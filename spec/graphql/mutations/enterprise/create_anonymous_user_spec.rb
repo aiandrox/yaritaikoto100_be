@@ -2,14 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe Mutations::Enterprise::LoginAnonymousUser, type: :request do
+RSpec.describe Mutations::Enterprise::CreateAnonymousUser, type: :request do
   describe 'execute' do
     let!(:user) { create(:user) }
     let(:context) { { current_user: user } }
     let(:query) do
       <<~QUERY
-        mutation LoginAnonymousUser($input:LoginAnonymousUserInput!) {
-          loginAnonymousUser(input:$input) {
+        mutation CreateAnonymousUser($input:CreateAnonymousUserInput!) {
+          createAnonymousUser(input:$input) {
             id
             uuid
           }
@@ -27,7 +27,7 @@ RSpec.describe Mutations::Enterprise::LoginAnonymousUser, type: :request do
         expect(result.to_h.deep_symbolize_keys).to match(
           {
             data: {
-              loginAnonymousUser: {
+              createAnonymousUser: {
                 id: User.last.id,
                 uuid: be_present
               }

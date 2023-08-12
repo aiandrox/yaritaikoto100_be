@@ -2,9 +2,9 @@
 
 module Mutations
   module Enterprise
-    class LoginAnonymousUser < Mutations::BaseMutation
+    class CreateAnonymousUser < Mutations::BaseMutation
       description <<~DESC
-        匿名ユーザーとしてログインする。
+        匿名ユーザーを作成する。
       DESC
 
       field :id,
