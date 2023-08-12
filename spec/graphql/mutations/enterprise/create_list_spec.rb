@@ -19,7 +19,6 @@ RSpec.describe Mutations::Enterprise::CreateList, type: :request do
       QUERY
     end
 
-
     context 'when valid input' do
       let(:variables) do
         { input: {} }
@@ -33,7 +32,7 @@ RSpec.describe Mutations::Enterprise::CreateList, type: :request do
               createList: {
                 list: {
                   uuid: be_present,
-                  published: true,
+                  published: true
                 }
               }
             }
@@ -47,7 +46,7 @@ RSpec.describe Mutations::Enterprise::CreateList, type: :request do
         list = List.last
         expect(list).to be_present
         expect(list.uuid).to be_present
-        expect(list.published).to eq true
+        expect(list.published).to be true
       end
     end
   end
