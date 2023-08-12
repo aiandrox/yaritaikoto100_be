@@ -12,8 +12,8 @@ module Mutations
             null: false,
             description: '作成したやりたいことリスト情報'
 
-      def resolve(**args)
-        list = context[:current_user].lists.build(uuid: SecureRandom.uuid)
+      def resolve(**_args)
+        list = context[:current_user].lists.build(uuid: SecureRandom.urlsafe_base64)
         list.save!
 
         { list: }

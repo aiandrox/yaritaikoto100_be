@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :list do
     user
-    uuid { SecureRandom.uuid }
+    uuid { SecureRandom.urlsafe_base64 }
     published { Faker::Boolean.boolean }
   end
 end
