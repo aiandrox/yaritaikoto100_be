@@ -37,7 +37,7 @@ class EnterpriseSchema < GraphQL::Schema
     GlobalID.find(global_id)
   end
 
-  rescue_from(ActiveRecord::RecordNotFound) do |err, obj, args, ctx, field|
+  rescue_from(ActiveRecord::RecordNotFound) do |err, _obj, _args, _ctx, _field|
     # Raise a graphql-friendly error with a custom message
     raise GraphQL::ExecutionError, "#{err.model} not found"
   end

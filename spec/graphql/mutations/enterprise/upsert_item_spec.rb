@@ -29,7 +29,7 @@ RSpec.describe Mutations::Enterprise::UpsertItem, type: :request do
             input: {
               listUuid: list.uuid,
               number: 1,
-              name: '北海道旅行に行く',
+              name: '北海道旅行に行く'
             }
           }
         end
@@ -62,7 +62,7 @@ RSpec.describe Mutations::Enterprise::UpsertItem, type: :request do
       end
 
       context 'when item exists' do
-        let!(:item) { create(:item, list:, number: 1, name: '沖縄旅行に行く') }
+        let!(:item) { create(:item, list:, number: 1, name: '沖縄旅行に行く', done_at: nil) }
 
         let(:variables) do
           {
@@ -75,7 +75,7 @@ RSpec.describe Mutations::Enterprise::UpsertItem, type: :request do
           }
         end
 
-        it 'returns created item' do
+        it 'returns updated item' do
           result = EnterpriseSchema.execute(query:, context:, variables:)
           expect(result.to_h.deep_symbolize_keys).to eq(
             {
@@ -92,13 +92,14 @@ RSpec.describe Mutations::Enterprise::UpsertItem, type: :request do
           )
         end
 
-        it 'creates item' do
+        it 'updates item' do
           EnterpriseSchema.execute(query:, context:, variables:)
 
           item = Item.last
           expect(item).to be_present
           expect(item.number).to eq 1
           expect(item.name).to eq '北海道旅行に行く'
+          expect(item.done_at).to be_present
         end
       end
     end
@@ -110,12 +111,12 @@ RSpec.describe Mutations::Enterprise::UpsertItem, type: :request do
           input: {
             listUuid: list.uuid,
             number: 1,
-            name: '北海道旅行に行く',
+            name: '北海道旅行に行く'
           }
         }
       end
 
-      it 'returns created item' do
+      it 'returns error' do
         result = EnterpriseSchema.execute(query:, context:, variables:)
         expect(result.to_h.deep_symbolize_keys).to eq(
           {

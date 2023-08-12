@@ -11,10 +11,10 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      current_user: current_user,
+      current_user:
     }
     result = EnterpriseSchema.execute(query, variables:, context:,
-                                                   operation_name:)
+                                             operation_name:)
     render json: result
   rescue StandardError => e
     raise e unless Rails.env.development?
@@ -55,9 +55,9 @@ class GraphqlController < ApplicationController
   def current_user
     return @current_user if defined?(@current_user)
 
-    if (user_id = cookies.signed[:user_id])
-      user = User.find_by(id: user_id)
-      @current_user ||= user if user && user.authenticated?(cookies[:uuid])
-    end
+    return unless (user_id = cookies.signed[:user_id])
+
+    user = User.find_by(id: user_id)
+    @current_user ||= user if user&.authenticated?(cookies[:uuid])
   end
 end

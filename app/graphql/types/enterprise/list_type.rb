@@ -13,7 +13,6 @@ module Types
       field :uuid,
             String,
             null: false,
-            method: :uuid,
             description: 'やりたいことリストID'
 
       field :published,

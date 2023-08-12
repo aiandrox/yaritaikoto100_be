@@ -15,7 +15,7 @@ module Resolvers
       end
 
       def authorized?(**_args)
-        context[:current_user].present?
+        login?
       end
     end
   end

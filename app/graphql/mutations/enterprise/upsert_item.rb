@@ -23,9 +23,9 @@ module Mutations
                description: 'やりたいこと'
 
       argument :done_at,
-                GraphQL::Types::ISO8601DateTime,
-                required: false,
-                description: '完了日時'
+               GraphQL::Types::ISO8601DateTime,
+               required: false,
+               description: '完了日時'
 
       field :item,
             Types::Enterprise::ItemType,
@@ -43,7 +43,7 @@ module Mutations
       end
 
       def authorized?(**_inputs)
-        context[:current_user].present?
+        login?
       end
     end
   end
