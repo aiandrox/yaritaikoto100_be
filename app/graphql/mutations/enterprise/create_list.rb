@@ -20,7 +20,7 @@ module Mutations
       end
 
       def authorized?(**_inputs)
-        login?
+        login? || raise(Errors::UnauthorizedError)
       end
     end
   end

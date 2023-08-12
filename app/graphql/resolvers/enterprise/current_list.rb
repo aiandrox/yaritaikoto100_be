@@ -10,7 +10,7 @@ module Resolvers
       end
 
       def authorized?(**_args)
-        login?
+        login? || raise(Errors::UnauthorizedError)
       end
     end
   end

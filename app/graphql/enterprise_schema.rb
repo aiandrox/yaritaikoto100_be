@@ -38,7 +38,6 @@ class EnterpriseSchema < GraphQL::Schema
   end
 
   rescue_from(ActiveRecord::RecordNotFound) do |err, _obj, _args, _ctx, _field|
-    # Raise a graphql-friendly error with a custom message
-    raise GraphQL::ExecutionError, "#{err.model} not found"
+    raise Errors::NotFoundError, "#{err.model} not found"
   end
 end
