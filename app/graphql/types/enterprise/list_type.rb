@@ -15,6 +15,11 @@ module Types
             null: false,
             description: 'やりたいことリストID'
 
+      field :title,
+            String,
+            null: false,
+            description: 'リストタイトル'
+
       field :published,
             Boolean,
             null: false,
