@@ -28,15 +28,9 @@ class List < ApplicationRecord
   validates :uuid, presence: true, uniqueness: true
   validates :title, presence: true, length: { maximum: 15 }
 
-  def self.create_with_items!(user)
+  def self.create_default_value!(user)
     list = new(user_id: user.id, uuid: SecureRandom.urlsafe_base64, title: 'やりたいことリスト')
-    ActiveRecord::Base.transaction do
-      list.save!
-      item_hash = (1..100).map do |number|
-        { list_id: list.id, number:, name: '' }
-      end
-      Item.insert_all(item_hash, record_timestamps: true)
-    end
+    list.save!
     list
   end
 end

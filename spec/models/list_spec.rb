@@ -3,14 +3,20 @@
 require 'rails_helper'
 
 RSpec.describe List do
-  describe 'create_with_items!' do
-    subject(:create_with_items!) { described_class.create_with_items!(user) }
+  describe 'create_default_value!' do
+    subject(:create_default_value!) { described_class.create_default_value!(user) }
 
     let(:user) { create(:user) }
 
-    it 'creates list and items' do
-      expect { create_with_items! }.to change { List.count }.by(1)
-                                   .and change { Item.count }.by(100)
+    it 'creates list' do
+      expect { create_default_value! }.to change { List.count }.by(1)
+    end
+
+    it 'creates list with default attributes' do
+      create_default_value!
+      list = List.last
+      expect(list.title).to eq('やりたいことリスト')
+      expect(list.items.count).to eq(0)
     end
   end
 end

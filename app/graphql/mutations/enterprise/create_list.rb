@@ -13,7 +13,7 @@ module Mutations
             description: '作成したやりたいことリスト情報'
 
       def resolve(**_args)
-        list = List.create_with_items!(context[:current_user])
+        list = List.create_default_value!(context[:current_user])
 
         { list: }
       end
