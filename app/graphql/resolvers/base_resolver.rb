@@ -2,11 +2,10 @@
 
 module Resolvers
   class BaseResolver < GraphQL::Schema::Resolver
-    include Helpers::SessionHelper
+    include Helpers::Authorize
 
-    # NOTE: 認可処理を実装する
-    def authorized?(**_inputs)
-      raise NotImplementedError
+    def ready?(**_args)
+      authenticate_user!
     end
   end
 end

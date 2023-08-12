@@ -8,10 +8,6 @@ module Resolvers
       def resolve(**_args)
         context[:current_user].lists.order(updated_at: :desc).first
       end
-
-      def authorized?(**_args)
-        login? || raise(Errors::UnauthorizedError)
-      end
     end
   end
 end

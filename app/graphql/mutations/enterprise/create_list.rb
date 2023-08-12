@@ -18,10 +18,6 @@ module Mutations
 
         { list: }
       end
-
-      def authorized?(**_inputs)
-        login? || raise(Errors::UnauthorizedError)
-      end
     end
   end
 end
