@@ -59,7 +59,11 @@ RSpec.describe Resolvers::Enterprise::CurrentList, type: :request do
 
       it 'return expected list' do
         result = EnterpriseSchema.execute(query:, context:, variables:)
-        expect(result.to_h.deep_symbolize_keys[:data]).to be_nil
+        expect(result.to_h.deep_symbolize_keys[:data]).to eq(
+          {
+            currentList: nil
+          }
+        )
       end
     end
   end
