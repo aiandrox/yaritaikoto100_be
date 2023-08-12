@@ -3,5 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe List do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'create_with_items!' do
+    subject(:create_with_items!) { described_class.create_with_items!(user) }
+
+    let(:user) { create(:user) }
+
+    it 'creates list and items' do
+      expect { create_with_items! }.to change { List.count }.by(1)
+                                   .and change { Item.count }.by(100)
+    end
+  end
 end

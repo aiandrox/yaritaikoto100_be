@@ -25,4 +25,16 @@ class List < ApplicationRecord
   has_many :items, dependent: :destroy
 
   validates :uuid, presence: true, uniqueness: true
+
+  def self.create_with_items!(user)
+    list = new(user_id: user.id, uuid: SecureRandom.urlsafe_base64)
+    ActiveRecord::Base.transaction do
+      list.save!
+      item_hash = (1..100).map do |number|
+        { list_id: list.id, number:, name: '' }
+      end
+      Item.insert_all(item_hash, record_timestamps: true)
+    end
+    list
+  end
 end
