@@ -5,8 +5,8 @@ module Resolvers
     class List < BaseResolver
       type Types::Enterprise::ListType, null: false
 
-      argument :id,
-               Int,
+      argument :uuid,
+               String,
                required: true,
                description: 'やりたいことリストID'
 

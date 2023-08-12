@@ -7,8 +7,8 @@ module Mutations
         やりたいことリスト項目を追加・更新する。
       DESC
 
-      argument :list_id,
-               Int,
+      argument :list_uuid,
+               String,
                required: true,
                description: 'やりたいことリストID'
 
@@ -33,7 +33,7 @@ module Mutations
             description: '作成した項目'
 
       def resolve(**args)
-        list = context[:current_user].lists.find(args[:list_id])
+        list = context[:current_user].lists.find_by!(uuid: args[:list_uuid])
 
         item = list.items.find_or_initialize_by(number: args[:number])
         item.assign_attributes(name: args[:name], done_at: args[:done_at])

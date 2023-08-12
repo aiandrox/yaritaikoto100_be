@@ -27,7 +27,7 @@ RSpec.describe Mutations::Enterprise::UpsertItem, type: :request do
         let(:variables) do
           {
             input: {
-              listId: list.id,
+              listUuid: list.uuid,
               number: 1,
               name: '北海道旅行に行く',
             }
@@ -67,7 +67,7 @@ RSpec.describe Mutations::Enterprise::UpsertItem, type: :request do
         let(:variables) do
           {
             input: {
-              listId: list.id,
+              listUuid: list.uuid,
               number: 1,
               name: '北海道旅行に行く',
               doneAt: '2023-01-01T00:00:00Z'
@@ -108,7 +108,7 @@ RSpec.describe Mutations::Enterprise::UpsertItem, type: :request do
       let(:variables) do
         {
           input: {
-            listId: list.id,
+            listUuid: list.uuid,
             number: 1,
             name: '北海道旅行に行く',
           }

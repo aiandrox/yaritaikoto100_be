@@ -10,7 +10,7 @@ module Types
             null: false,
             description: 'ユーザ'
 
-      field :id,
+      field :uuid,
             String,
             null: false,
             method: :uuid,

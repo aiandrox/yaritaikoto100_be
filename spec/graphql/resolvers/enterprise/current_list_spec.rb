@@ -10,7 +10,7 @@ RSpec.describe Resolvers::Enterprise::CurrentList, type: :request do
       <<~QUERY
         query CurrentListQuery {
           currentList {
-            id
+            uuid
             published
             items {
               number
@@ -35,7 +35,7 @@ RSpec.describe Resolvers::Enterprise::CurrentList, type: :request do
           {
             data: {
               currentList: {
-                id: list.uuid,
+                uuid: list.uuid,
                 published: list.published,
                 items: [
                   {
