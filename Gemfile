@@ -30,6 +30,12 @@ gem 'rack-cors'
 gem 'graphql'
 gem 'graphql-batch'
 
+gem 'devise'
+gem 'devise_token_auth'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
@@ -44,6 +50,8 @@ group :development, :test do
   gem 'rubocop-inflector', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
 end
 
 group :development do
