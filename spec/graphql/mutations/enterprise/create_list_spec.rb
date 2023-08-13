@@ -13,6 +13,10 @@ RSpec.describe Mutations::Enterprise::CreateList, type: :request do
             list {
               uuid
               published
+              items {
+                number
+                name
+              }
             }
           }
         }
@@ -21,7 +25,11 @@ RSpec.describe Mutations::Enterprise::CreateList, type: :request do
 
     context 'when valid input' do
       let(:variables) do
-        { input: {} }
+        {
+          input: {
+            items: %w[北海道旅行に行く 沖縄旅行に行く]
+          }
+        }
       end
 
       it 'returns created list' do
@@ -32,7 +40,17 @@ RSpec.describe Mutations::Enterprise::CreateList, type: :request do
               createList: {
                 list: {
                   uuid: be_present,
-                  published: true
+                  published: true,
+                  items: [
+                    {
+                      number: 1,
+                      name: '北海道旅行に行く'
+                    },
+                    {
+                      number: 2,
+                      name: '沖縄旅行に行く'
+                    }
+                  ]
                 }
               }
             }
@@ -47,6 +65,18 @@ RSpec.describe Mutations::Enterprise::CreateList, type: :request do
         expect(list).to be_present
         expect(list.uuid).to be_present
         expect(list.published).to be true
+      end
+
+      it 'creates items' do
+        EnterpriseSchema.execute(query:, context:, variables:)
+
+        item = Item.first
+        expect(item.number).to eq 1
+        expect(item.name).to eq '北海道旅行に行く'
+
+        item = Item.last
+        expect(item.number).to eq 2
+        expect(item.name).to eq '沖縄旅行に行く'
       end
     end
   end
