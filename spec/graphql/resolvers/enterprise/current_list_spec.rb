@@ -8,7 +8,7 @@ RSpec.describe Resolvers::Enterprise::CurrentList, type: :request do
     let(:context) { { current_user: user } }
     let(:query) do
       <<~QUERY
-        query CurrentListQuery {
+        query CurrentList {
           currentList {
             uuid
             title
