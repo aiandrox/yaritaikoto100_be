@@ -46,7 +46,7 @@ DeviseTokenAuth.setup do |config|
   config.cookie_attributes = {
     http_only: true,
     secure: true,
-    same_site: "None"
+    same_site: 'None'
   }
 
   # Makes it possible to change the headers names
