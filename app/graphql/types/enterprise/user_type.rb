@@ -9,6 +9,11 @@ module Types
             Int,
             null: false,
             description: 'ユーザーID'
+
+      field :name,
+            String,
+            null: false,
+            description: 'ユーザー名'
     end
   end
 end
