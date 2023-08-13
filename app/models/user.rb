@@ -9,6 +9,7 @@
 #  confirmation_token   :string(255)
 #  confirmed_at         :datetime
 #  email                :string(255)      default(""), not null
+#  encrypted_password   :string(255)      default(""), not null
 #  image                :string(255)
 #  name                 :string(255)
 #  nickname             :string(255)
@@ -36,19 +37,7 @@ class User < ApplicationRecord
 
   has_many :lists, dependent: :destroy
 
-  attr_accessor :uuid
-
   class << self
-    def create_anonymous!
-      uuid = new_uuid
-      user = new(
-        uuid:,
-        user_digest: digest(uuid)
-      )
-      user.save!
-      user
-    end
-
     def from_omniauth(access_token)
       data = access_token.info
       user = User.where(email: data['email']).first
@@ -58,20 +47,5 @@ class User < ApplicationRecord
       )
       user
     end
-
-    private
-
-    def new_uuid
-      SecureRandom.urlsafe_base64
-    end
-
-    def digest(string)
-      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-      BCrypt::Password.create(string, cost:)
-    end
-  end
-
-  def authenticated?(uuid)
-    BCrypt::Password.new(user_digest) == uuid
   end
 end

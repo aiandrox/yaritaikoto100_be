@@ -4,9 +4,6 @@ module Types
   class MutationType < Types::BaseObject
     description 'MutationType'
 
-    field :create_anonymous_user,
-          mutation: ::Mutations::Enterprise::CreateAnonymousUser
-
     field :upsert_item,
           mutation: ::Mutations::Enterprise::UpsertItem
 
