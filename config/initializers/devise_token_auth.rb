@@ -41,6 +41,14 @@ DeviseTokenAuth.setup do |config|
   # It depends on fields like email, provider and uid.
   # config.default_callbacks = true
 
+  config.cookie_enabled = true
+
+  config.cookie_attributes = {
+    http_only: true,
+    secure: true,
+    same_site: "None"
+  }
+
   # Makes it possible to change the headers names
   config.headers_names = {
     authorization: 'Authorization',
