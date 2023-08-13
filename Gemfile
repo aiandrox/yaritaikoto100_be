@@ -52,6 +52,9 @@ group :development, :test do
   gem 'rubocop-rspec', require: false
 
   gem 'dotenv-rails', require: 'dotenv/rails-now'
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development do
