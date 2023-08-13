@@ -20,8 +20,7 @@ class EnterpriseSchema < GraphQL::Schema
   # Stop validating when it encounters this many errors:
   validate_max_errors(100)
 
-  max_complexity 80
-  max_depth 8
+  max_depth 20
 
   # Relay-style Object Identification:
 
