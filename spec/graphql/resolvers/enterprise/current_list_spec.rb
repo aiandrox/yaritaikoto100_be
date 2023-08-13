@@ -59,11 +59,16 @@ RSpec.describe Resolvers::Enterprise::CurrentList, type: :request do
         create(:item, list:)
       end
 
-      it 'return expected list' do
+      it 'return error' do
         result = EnterpriseSchema.execute(query:, context:, variables:)
-        expect(result.to_h.deep_symbolize_keys[:data]).to eq(
+        expect(result.to_h.deep_symbolize_keys).to eq(
           {
-            currentList: nil
+            data: nil,
+            errors: [
+              {
+                message: 'Cannot return null for non-nullable field Query.currentList'
+              }
+            ]
           }
         )
       end

@@ -8,7 +8,7 @@ module Types
       field :user,
             UserType,
             null: false,
-            description: 'ユーザ'
+            description: 'ユーザー'
 
       field :uuid,
             String,
