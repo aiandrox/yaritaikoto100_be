@@ -3,7 +3,7 @@
 # https://github.com/lynndylanhurley/devise_token_auth/blob/master/app/controllers/devise_token_auth/omniauth_callbacks_controller.rb
 module Users
   class OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
-    include Devise::Controllers::Rememberable
+    include ActionController::Cookies
 
     def omniauth_success
       get_resource_from_auth_hash
@@ -23,7 +23,7 @@ module Users
 
       set_token_in_cookie(@resource, @token) if DeviseTokenAuth.cookie_enabled
 
-      render json: @resource, status: :ok
+      redirect_to YaritaikotoUrl.instance.url('/callbacks')
     end
 
     protected
