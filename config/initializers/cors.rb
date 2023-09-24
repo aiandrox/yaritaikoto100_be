@@ -10,7 +10,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     if Rails.env.development?
-      origins 'http://127.0.0.1:9000'
+      origins 'http://localhost:9000'
     elsif Rails.env.production?
       origins 'https://yaritaikoto100.vercel.app/'
     end
