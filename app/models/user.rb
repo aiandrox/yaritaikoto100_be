@@ -4,27 +4,17 @@
 #
 # Table name: users
 #
-#  id                   :bigint           not null, primary key
-#  confirmation_sent_at :datetime
-#  confirmation_token   :string(255)
-#  confirmed_at         :datetime
-#  email                :string(255)      default(""), not null
-#  encrypted_password   :string(255)      default(""), not null
-#  image                :string(255)
-#  name                 :string(255)
-#  nickname             :string(255)
-#  provider             :string(255)      default("email"), not null
-#  tokens               :text(65535)
-#  uid                  :string(255)      default(""), not null
-#  unconfirmed_email    :string(255)
-#  user_digest          :string(255)
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
+#  id         :bigint           not null, primary key
+#  email      :string(255)      not null
+#  name       :string(255)      not null
+#  uid        :string(255)      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 # Indexes
 #
-#  index_users_on_email             (email) UNIQUE
-#  index_users_on_uid_and_provider  (uid,provider) UNIQUE
+#  index_users_on_email  (email) UNIQUE
+#  index_users_on_uid    (uid) UNIQUE
 #
 class User < ApplicationRecord
   has_many :lists, dependent: :destroy
