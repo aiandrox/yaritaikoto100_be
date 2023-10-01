@@ -27,14 +27,6 @@
 #  index_users_on_uid_and_provider  (uid,provider) UNIQUE
 #
 class User < ApplicationRecord
-  include DeviseTokenAuth::Concerns::User
-
-  # Include default devise modules.
-  # devise :database_authenticatable, :registerable,
-  #        :recoverable, :rememberable, :trackable, :validatable,
-  #        :confirmable, :omniauthable
-  devise :omniauthable, omniauth_providers: [:google_oauth2]
-
   has_many :lists, dependent: :destroy
 
   class << self

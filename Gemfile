@@ -30,9 +30,6 @@ gem 'rack-cors'
 gem 'graphql'
 gem 'graphql-batch'
 
-gem 'devise'
-gem 'devise_token_auth'
-gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
