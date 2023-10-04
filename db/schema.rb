@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_142532) do
     t.string "uid", null: false
     t.string "name", null: false
     t.string "email", null: false
+    t.string "access_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

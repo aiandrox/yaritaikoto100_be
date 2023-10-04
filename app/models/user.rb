@@ -4,12 +4,13 @@
 #
 # Table name: users
 #
-#  id         :bigint           not null, primary key
-#  email      :string(255)      not null
-#  name       :string(255)      not null
-#  uid        :string(255)      not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :bigint           not null, primary key
+#  access_token :string(255)
+#  email        :string(255)      not null
+#  name         :string(255)      not null
+#  uid          :string(255)      not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
 # Indexes
 #
@@ -20,14 +21,22 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy
 
   class << self
-    def from_omniauth(access_token)
-      data = access_token.info
-      user = User.where(email: data['email']).first
-
-      user ||= User.create(
-        email: data['email']
-      )
-      user
+    def find_or_create_from_auth_hash(auth_hash)
+      User.where(uid: auth_hash.uid).first_or_create do |user|
+        user.email = auth_hash.info.email
+        user.name = auth_hash.info.name
+      end
     end
+  end
+
+  def update_access_token!
+    payload = {
+      sub: id,
+      exp: 1.week.since.end_of_day.to_i,
+      iat: Time.current.to_i
+    }
+    access_token = JWT.encode(payload, ENV.fetch('ACCESS_TOKEN_SECRET_KEY'))
+    update!(access_token:)
+    Time.zone.at(payload[:exp])
   end
 end
