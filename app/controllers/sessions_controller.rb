@@ -23,9 +23,8 @@ class SessionsController < ApplicationController
                         value: user.access_token,
                         expires: expires_at,
                         path: '/',
+                        same_site: :none,
                         secure: true,
                         httponly: true)
-    response.set_header('X-Access-Token', user.access_token)
-    response.set_header('X-Expires', expires_at)
   end
 end

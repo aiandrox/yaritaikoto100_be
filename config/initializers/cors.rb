@@ -10,14 +10,14 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     if Rails.env.development?
-      origins 'http://localhost:9000'
+      origins 'localhost:9000'
     elsif Rails.env.production?
       origins 'https://yaritaikoto100.vercel.app/'
     end
 
     resource '*',
              headers: :any,
-             expose: %w[access-token expiry token-type uid client],
-             methods: %i[get post put patch delete options head]
+             methods: %i[get post put patch delete options head],
+             credentials: true
   end
 end

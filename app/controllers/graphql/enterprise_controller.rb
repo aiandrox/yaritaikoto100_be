@@ -57,10 +57,15 @@ module Graphql
     def current_user
       return @current_user if defined?(@current_user)
 
-      return unless (user_id = cookies.signed[:user_id])
+      access_token = cookies[:access_token]
 
-      user = User.find_by(id: user_id)
-      @current_user ||= user if user&.authenticated?(cookies[:uuid])
+      if access_token.nil?
+        Rails.logger.info 'access_token is nil'
+        return
+      end
+
+      payload = JWT.decode(access_token, ENV.fetch('ACCESS_TOKEN_SECRET_KEY')).first
+      @current_user = User.find_by!(id: payload['sub'], access_token:)
     end
   end
 end
